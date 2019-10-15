@@ -61,6 +61,7 @@ AddPermission(p,b) == \* Add permission for p to enter b
 RevokePermission(p,b) ==
     /\ p \in register            \* p is registered
     /\ p \in DOMAIN permission   \* p has permissions
+    /\ location[p] /= b
     /\ permission' = [ permission \* existing permissions for everyone else
                        EXCEPT ![p] = \* update permission for p
                        permission[p] \ {b} ] \* existing permission without b
@@ -91,5 +92,5 @@ Next == \E p \in People, b \in Buildings : \* There is a person and a builing th
     \/ RevokePermission(p,b) \* the person can have permissions revoked, or
 =============================================================================
 \* Modification History
-\* Last modified Tue Oct 15 09:55:35 BST 2019 by alun
+\* Last modified Mon Oct 14 20:32:37 BST 2019 by alun
 \* Created Wed Oct 02 12:01:41 BST 2019 by alun
